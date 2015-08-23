@@ -1,0 +1,20 @@
+body {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: #eee;
+}
+
+.app-title {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.app-title .app-image-container{
+  margin-right: 30px;
+  padding-top: 10px;
+}
+
+.app-title .app-image-container, .app-title .app-heading {
+  display: inline-block;
+  vertical-align: middle;
+}

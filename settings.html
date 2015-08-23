@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html lang="en" ng-app="chromeCrashApp" ng-csp>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="icon.png">
+    <title>Chrome Crash</title>
+    <!-- Vendor -->
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="./vendor/angular/angular-csp.css">
+    <link rel="stylesheet" href="./vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./vendor/bootstrap/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="./vendor/gritter/css/jquery.gritter.css">
+    <!-- Custom -->
+    <link rel="stylesheet" href="./css/settings-style.css">
+
+    <!-- JavaScript -->
+    <script src="./vendor/jquery/jquery.min.js"></script>
+    <script src="./vendor/angular/angular.min.js"></script>
+    <script src="./vendor/angular/angular-route.min.js"></script>
+    <script src="./vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="./vendor/gritter/js/jquery.gritter.min.js"></script>
+    <script src="./vendor/jsonpath/jsonpath.js"></script>
+    <!--
+      @app: Chrome Crash
+    -->
+    <script src="./js/lib/util.js"></script>
+    <script src="./js/chrome-crash.js"></script>
+    <!-- Controllers -->
+    <script src="./js/controllers/chrome-crash/base-controller.js"></script>
+    <script src="./js/controllers/chrome-crash/main-controller.js"></script>
+    <script src="./js/controllers/chrome-crash/settings-controller.js"></script>
+    <!-- Directives -->
+    <script src="./js/directives/chrome-crash/crash-notifications.js"></script>
+    <script src="./js/directives/chrome-crash/crash-loader.js"></script>
+    <!-- Angular -->
+    <script src="./js/settings/app.js"></script>
+    <script src="./js/settings/routes.js"></script>
+  </head>
+  <body ng-controller="MainController">
+    <header>
+      <div class="container-fluid">
+        <div class="row app-title">
+          <div class='col-sm-12'>
+            <img src='./img/meteor-icon.png' class='app-image-container' />
+            <h2 class="app-heading">{{ appTitle }}</h2>
+          </div>
+          <div class="clear"></div>
+        </div>
+      </div>
+    </header>
+    <div id='main'>
+      <div ng-view></div>
+    </div>
+  </body>
+</html>

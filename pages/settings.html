@@ -1,0 +1,83 @@
+<div class="container">
+  <crash-notifications ng-model="notifications"></crash-notifications>
+  <form class="form-horizontal settings-form" name='settingsForm' role="form">
+    <div class="form-group" ng-class="{ 'has-error': !settingsForm.loginResource.$valid }">
+      <label class="control-label col-sm-3" for="loginResource">Login URL:</label>
+      <div class="col-sm-9">
+        <input type="url" placeholder='http://example.com' name='loginResource' ng-model='setting.loginResource' required class="form-control">
+        <p ng-show='settingsForm.loginResource.$error.required' class="help-block">Required</p>
+        <p ng-show='settingsForm.loginResource.$error.url' class="help-block">Not a url</p>
+      </div>
+    </div>
+    <div class="form-group" ng-class="{ 'has-error': !settingsForm.webhookResource.$valid }">
+      <label class="control-label col-sm-3" for="webhookResource">Webhook URL:</label>
+      <div class="col-sm-9">
+        <input type="url" placeholder='http://example.com' name='webhookResource' ng-model='setting.webhookResource' required class="form-control">
+        <p ng-show='settingsForm.webhookResource.$error.required' class="help-block">Required</p>
+        <p ng-show='settingsForm.webhookResource.$error.url' class="help-block">Not a url</p>
+      </div>
+    </div>
+    <div class="form-group" ng-class="{ 'has-error': !settingsForm.authTokenName.$valid }">
+      <label class="control-label col-sm-3" for="authTokenName">Token Header Name:</label>
+      <div class="col-sm-9">
+        <input type="text" name='authTokenName' ng-model='setting.authTokenName' class="form-control" required>
+        <p ng-show='settingsForm.authTokenName.$error.required' class="help-block">Required</p>
+      </div>
+    </div>
+    <div class="form-group" ng-class="{ 'has-error': !settingsForm.userIdName.$valid }">
+      <label class="control-label col-sm-3" for="userIdName">User Id Header Name:</label>
+      <div class="col-sm-9">
+        <input type="text" name='userIdName' ng-model='setting.userIdName' class="form-control" required>
+        <p ng-show='settingsForm.userIdName.$error.required' class="help-block">Required</p>
+      </div>
+    </div>
+    <div class="form-group" ng-class="{ 'has-error': !settingsForm.authTokenPath.$valid }">
+      <label class="control-label col-sm-3" for="authTokenPath">Token Response JsonPath:</label>
+      <div class="col-sm-9">
+        <input type="text" name='authTokenPath' ng-model='setting.authTokenPath' class="form-control" required>
+        <p ng-show='settingsForm.authTokenPath.$error.required' class="help-block">Required</p>
+      </div>
+    </div>
+    <div class="form-group" ng-class="{ 'has-error': !settingsForm.userIdPath.$valid }">
+      <label class="control-label col-sm-3" for="userIdPath">User Id Response JsonPath:</label>
+      <div class="col-sm-9">
+        <input type="text" name='userIdPath' ng-model='setting.userIdPath' class="form-control" required>
+        <p ng-show='settingsForm.userIdPath.$error.required' class="help-block">Required</p>
+      </div>
+    </div>
+    <div class="form-group" ng-class="{ 'has-error': !settingsForm.usernameParam.$valid }">
+      <label class="control-label col-sm-3" for="usernameParam">Username Param:</label>
+      <div class="col-sm-9">
+        <input type="text" name='usernameParam' ng-model='setting.usernameParam' class="form-control" required>
+        <p ng-show='settingsForm.usernameParam.$error.required' class="help-block">Required</p>
+      </div>
+    </div>
+    <div class="form-group" ng-class="{ 'has-error': !settingsForm.passwordParam.$valid }">
+      <label class="control-label col-sm-3" for="passwordParam">Password Param:</label>
+      <div class="col-sm-9">
+        <input type="text" name='passwordParam' ng-model='setting.passwordParam' class="form-control" required>
+        <p ng-show='settingsForm.passwordParam.$error.required' class="help-block">Required</p>
+      </div>
+    </div>
+    <div class="form-group" ng-class="{ 'has-error': !settingsForm.webhookParam.$valid }">
+      <label class="control-label col-sm-3" for="webhookParam">Webhook Param:</label>
+      <div class="col-sm-9">
+        <input type="text" name='webhookParam' ng-model='setting.webhookParam' class="form-control" required>
+        <p ng-show='settingsForm.webhookParam.$error.required' class="help-block">Required</p>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-3 col-sm-9">
+        <div class="checkbox">
+          <label><input ng-model='setting.rememberCredentials' type="checkbox">Remember Credentials</label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-3 col-sm-9">
+        <button type="submit" ng-click="save(setting)" class="btn btn-primary">Save</button>
+        <button ng-click="back(setting)" class="btn btn-default">Back</button>
+      </div>
+    </div>
+  </form>
+</div>
