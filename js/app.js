@@ -5,7 +5,7 @@ chromeCrashApp.value('$sharedData',{
   user: null,
   authTokenHeaders: null,
   appData: {
-    name: 'Meteor Rest Analyzer',
+    name: 'Table Reader',
     storeKey: 'meteorData'
   }
 });

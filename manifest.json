@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
-  "name": "Chrome Crash Plugin",
-  "description": "Chrome extension to post web page content into a meteor site",
+  "name": "Table Reader Plugin",
+  "description": "Chrome extension to read a specific html table and provide an html file",
   "version": "0.1",
   "browser_action": {
    "default_icon": "icon.png",

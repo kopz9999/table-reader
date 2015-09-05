@@ -25,6 +25,7 @@ LoginController.prototype._initScope = function () {
 };
 
 LoginController.prototype.authenticate = function (user) {
+  /*
   if ( this._loadedSettings ) {
     if ( !this._scope.usersForm.$valid ) {
       this._displayFormErrorMessage();
@@ -37,6 +38,13 @@ LoginController.prototype.authenticate = function (user) {
   } else {
     this._addNotification('Settings not loaded');
   }
+  */
+  var _self = this;
+  this._scope.loading = true;
+  this._addNotification('Error ...');
+  //setTimeout( function() {
+    //_self._addNotification('Error ...');
+  //}, 3000);
 };
 
 LoginController.prototype._doRequest = function () {
@@ -92,7 +100,7 @@ LoginController.prototype._onLoadSettingsSuccess = function() {
 };
 
 LoginController.prototype._onLoadSettingsFailure = function() {
-  this.showSettings();
+  //this.showSettings();
 };
 
 ChromeCrash.LoginController = LoginController;
