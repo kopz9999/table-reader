@@ -4,6 +4,7 @@ chromeCrashApp.value('$sharedData',{
   setting: null,
   user: null,
   authTokenHeaders: null,
+  baseURL: 'http://107.170.43.39',
   appData: {
     name: 'Table Reader',
     storeKey: 'meteorData'

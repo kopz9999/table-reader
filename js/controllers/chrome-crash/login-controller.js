@@ -13,53 +13,63 @@ extend(LoginController, ChromeCrash.BaseController);
 extend(LoginController.prototype, ChromeCrash.Authenticable);
 
 LoginController.prototype._initScope = function () {
-  var _self = this;
   this._scope.user = {};
   this._scope.loading = false;
-  this._scope.authenticate = function( user ){
-    _self.authenticate(user);
-  };
-  this._scope.showSettings = function(){
-    _self.showSettings();
-  };
 };
 
-LoginController.prototype.authenticate = function (user) {
-  /*
-  if ( this._loadedSettings ) {
-    if ( !this._scope.usersForm.$valid ) {
-      this._displayFormErrorMessage();
-      return;
-    } else {
-      this._currentUser = user;
-      if (this._setting.rememberCredentials) this._saveCredentials();
-      this._doRequest();
+LoginController.prototype.requestFile = function () {
+  this.inspectTable();
+};
+
+LoginController.prototype.inspectTable = function () {
+  var _self = this;
+  chrome.tabs.getSelected(null, function(tab) {
+    chrome.tabs.sendMessage(tab.id, "inspectTable", function(domContent) {
+      _self.readTable( domContent );
+    });
+  });
+};
+
+LoginController.prototype.readTable = function ( domContent ) {
+  var rows = $(domContent).find('div.dataWrapper table.dataTable > tbody > tr');
+  var clients = [];
+  rows.each( function(k, v) {
+    var row = $(v);
+    var columns = row.find('td');
+    if (columns.length == 12) {
+      clients.push(new Client({
+        identifier: columns.eq(0).text(),
+        dateCreated: columns.eq(1).text(),
+        salesStatus: columns.eq(2).text(),
+        firstName: columns.eq(3).text(),
+        lastName: columns.eq(4).text(),
+        language: columns.eq(5).text(),
+        country: columns.eq(6).text(),
+        salesAgent: columns.eq(7).text(),
+        type: columns.eq(8).text(),
+        lastNoteDate: columns.eq(9).text(),
+        loggedIn: columns.eq(10).text()
+      }));
     }
-  } else {
-    this._addNotification('Settings not loaded');
-  }
-  */
-  var _self = this;
-  this._scope.loading = true;
-  this._addNotification('Error ...');
-  //setTimeout( function() {
-    //_self._addNotification('Error ...');
-  //}, 3000);
+  });
+  this._doRequest(clients);
 };
 
-LoginController.prototype._doRequest = function () {
+LoginController.prototype._doRequest = function (clients) {
   var _self = this;
-  this._scope.loading = true;
-  this._http.post( this._setting.loginResource,
-    this.getCredentialParams(this._currentUser)).
-      success(function(data, status, headers, config) {
-        _self._scope.loading = false;
-        _self._onRequestSuccess( data );
-      }).
-      error(function(data, status, headers, config) {
-        _self._scope.loading = false;
-        _self._onRequestError( status );
-      });
+  this._http({
+    method: 'POST',
+    url: this._sharedData.baseURL+ '/documents',
+    data: {
+      clients: clients
+    },
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }).then(function(response){
+    var newURL = _self._sharedData.baseURL+'/docs/'+response.data.id+'.csv';
+    chrome.tabs.create({ url: newURL });
+  });
 };
 
 LoginController.prototype._onRequestSuccess = function( data ){
